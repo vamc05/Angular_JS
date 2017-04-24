@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html ng-app="gitApp">
+
+  <head>
+    <meta charset="utf-8" />
+    <title>AngularJS Plunker</title>
+    <script>document.write('<base href="' + document.location + '" />');</script>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script data-require="angular.js@1.5.x" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.11/angular.min.js" data-semver="1.5.11"></script>
+   <script src="index.app.js"></script>
+    <script src="index.service.js"></script>
+    <script src="index.controller.js"></script>
+  </head>
+
+  <body ng-controller="gitUsersCtrl as vm">
+    <header class="header">
+        <h1>Github User Search</h1>
+    </header>
+    <br />
+    <section class="container-fluid margin-top-16" ng-cloak>
+        <div class="text-center row">
+            <div class="col-lg-6 col-lg-offset-3">
+                <form>
+                    <div class="form-group">
+                        <input class="form-control" type="text" ng-model="vm.searchTerm" placeholder="Enter user name" />
+                    </div>
+                    <button ng-hide="vm.showRepositories" class="btn btn-info" ng-click="vm.getUser()">Search</button>
+                </form>
+            </div>
+        </div>
+        <br />
+        <br />
+        <div ng-hide="vm.isUserSearch" class="text-center">
+            <p class="text-info">Please enter user name and click on search.</p>
+        </div>
+        <div ng-show="vm.isUserSearch">
+            <div class="well bg-white pointer">
+                <div class="text-center" ng-if="vm.noUserFound">
+                    <p class="help-text">No users found with <span class="text-danger">'{{vm.searchTerm}}'</span>. Please modify your search term and try again. </p>
+                </div>
+                <div class="row xs-text-center" ng-if="!vm.noUserFound">
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
+                        <div>
+                            <img ng-src="{{vm.userInfo.avatar_url}}" class="img-responsive img-thumbnail" alt="User Avatar" />
+                        </div>
+                    </div>
+                    <div class="col-lg-10 col-md-9 col-sm-8 col-xs-12">
+                        <div>
+                            <h1 class="user-name" ng-bind="vm.userInfo.name|| 'N/A'"></h1>
+                            <label class="label label-success" ng-bind-template="Followers: {{vm.userInfo.followers}}"></label>
+                            <label class="label label-info" ng-bind-template="Following: {{vm.userInfo.following}}"></label>
+                            <p class="created" ng-bind-template="Created on: {{vm.userInfo.created_at |date:'medium' }}"></p>
+                            <!--<p ng-bind="vm.userInfo.repos_url"></p>-->
+                            <button class="btn btn-primary" ng-click="vm.showAllRepos(vm.userInfo.repos_url)">Show All Repos </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <strong>All Repositories List</strong> (<a target="_blank" href="{{vm.userInfo.repos_url}}">All Repositories Raw <span class="glyphicon glyphicon-new-window"></span> </a>)
+                </div>
+                <br />
+                <br />
+                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12" ng-repeat="repo in vm.repos">
+                    <div class="well repo-well">
+                        <h1 class="repo-name"> {{repo.name}}</h1>
+                        <p> <span class="glyphicon glyphicon-star"></span> Stars: {{repo.stargazers_count}}</p>
+                        <p class="no-bottom-margin"> <span class="glyphicon glyphicon-exclamation-sign"></span> Open Issues: {{repo.open_issues_count}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+<!-- //hello -->
+
+</html>

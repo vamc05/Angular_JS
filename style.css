@@ -1,0 +1,61 @@
+/* Put your css in here */
+
+.header {
+    background: #03A9F4;
+    color: #fff;
+    padding: 16px;
+}
+
+.header h1 {
+    margin: 0;
+}
+
+.margin-top-16 {
+    margin-top: 16px;
+}
+
+.bg-white {
+    background: #fff !important;
+}
+
+.img-thumbnail {
+    width: 200px;
+    height: 200px;
+}
+
+.help-text {
+    font-size: 20px;
+}
+
+.user-name {
+    margin-top: 0;
+}
+
+.label {
+    padding: 6px 12px !important;
+    margin-right: 5px !important;
+}
+
+.created {
+    margin-top: 10px;
+}
+
+.repo-name {
+    font-size: 20px;
+    margin-top: 0;
+}
+
+.no-bottom-margin {
+    margin-bottom: 0;
+}
+
+.repo-well {
+    padding: 16px !important;
+    min-height: 140px !important;
+}
+
+@media(max-width:768px) {
+    .xs-text-center {
+        text-align: center;
+    }
+}
